@@ -88,8 +88,10 @@ class GCN(ScalableGNN):
 
         h = self.convs[-1](x, adj_t)
 
+        memory_alloc = torch.cuda.memory_allocated() / (1024 * 1024)
+
         if not self.linear:
-            return h
+            return h, memory_alloc
 
         if self.batch_norm:
             h = self.bns[-1](h)
@@ -97,7 +99,8 @@ class GCN(ScalableGNN):
             h += x[:h.size(0)]
         h = h.relu_()
         h = F.dropout(h, p=self.dropout, training=self.training)
-        return self.lins[1](h)
+        # return self.lins[1](h)
+        return h, memory_alloc
 
     @torch.no_grad()
     def forward_layer(self, layer, x, adj_t, state):

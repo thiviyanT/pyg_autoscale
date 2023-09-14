@@ -1,7 +1,7 @@
 # @package _group_
 name: GCN
 norm: true
-loop: false
+loop: true
 params:
 
   Cora:
@@ -9,117 +9,149 @@ params:
       num_layers: 2
       hidden_channels: 16
       dropout: 0.5
+      batch_norm: false
+      residual: false
     num_parts: 40
-    batch_size: 10
+    batch_size: 256
     num_workers: 0
     lr: 0.01
     reg_weight_decay: 5e-4
     nonreg_weight_decay: 0
     grad_norm: 1.0
     epochs: 200
-    runs: 20
-
-  CiteSeer:
-    architecture:
-      num_layers: 2
-      hidden_channels: 16
-      dropout: 0.5
-    num_parts: 24
-    batch_size: 8
-    num_workers: 0
-    lr: 0.01
-    reg_weight_decay: 5e-4
-    nonreg_weight_decay: 0
-    grad_norm: null
-    epochs: 200
-    runs: 20
+    runs: 10
 
   PubMed:
     architecture:
       num_layers: 2
       hidden_channels: 16
       dropout: 0.5
+      batch_norm: false
+      residual: false
     num_parts: 8
-    batch_size: 4
+    batch_size: 256
     num_workers: 0
     lr: 0.01
     reg_weight_decay: 5e-4
     nonreg_weight_decay: 0
     grad_norm: 1.0
     epochs: 200
-    runs: 20
+    runs: 10
 
-  CoauthorCS:
+  CiteSeer:
     architecture:
       num_layers: 2
-      hidden_channels: 64
+      hidden_channels: 16
       dropout: 0.5
-    num_parts: 2
-    batch_size: 1
+      batch_norm: false
+      residual: false
+    num_parts: 24
+    batch_size: 256
     num_workers: 0
     lr: 0.01
-    reg_weight_decay: 0.001
-    nonreg_weight_decay: 0
-    grad_norm: 1.0
-    epochs: 200
-    runs: 20
-
-  CoauthorPhysics:
-    architecture:
-      num_layers: 2
-      hidden_channels: 64
-      dropout: 0.5
-    num_parts: 4
-    batch_size: 2
-    num_workers: 0
-    lr: 0.01
-    reg_weight_decay: 0.001
-    nonreg_weight_decay: 0
-    grad_norm: null
-    epochs: 200
-    runs: 20
-
-  AmazonComputers:
-    architecture:
-      num_layers: 2
-      hidden_channels: 64
-      dropout: 0.5
-    num_parts: 32
-    batch_size: 16
-    num_workers: 0
-    lr: 0.01
-    reg_weight_decay: 0.001
-    nonreg_weight_decay: 0
-    grad_norm: 1.0
-    epochs: 200
-    runs: 20
-
-  AmazonPhoto:
-    architecture:
-      num_layers: 2
-      hidden_channels: 64
-      dropout: 0.5
-    num_parts: 32
-    batch_size: 16
-    num_workers: 0
-    lr: 0.01
-    reg_weight_decay: 0.001
-    nonreg_weight_decay: 0
-    grad_norm: null
-    epochs: 200
-    runs: 20
-
-  WikiCS:
-    architecture:
-      num_layers: 2
-      hidden_channels: 33
-      dropout: 0.25
-    num_parts: 32
-    batch_size: 16
-    num_workers: 0
-    lr: 0.02
     reg_weight_decay: 5e-4
     nonreg_weight_decay: 0
-    grad_norm: 1.0
+    grad_norm: null
     epochs: 200
-    runs: 20
+    runs: 10
+
+  reddit:
+    architecture:
+      num_layers: 2
+      hidden_channels: 256
+      dropout: 0.5
+      drop_input: false
+      batch_norm: false
+      residual: false
+    num_parts: 200
+    batch_size: 256
+    max_steps: 2
+    pool_size: 2
+    num_workers: 0
+    lr: 0.01
+    reg_weight_decay: 0.0
+    nonreg_weight_decay: 0.0
+    grad_norm: none
+    epochs: 400
+    runs: 10
+
+  flickr:
+    architecture:
+      num_layers: 2
+      hidden_channels: 256
+      dropout: 0.3
+      drop_input: true
+      batch_norm: false
+      residual: false
+    num_parts: 24
+    batch_size: 256
+    max_steps: 2
+    pool_size: 2
+    num_workers: 0
+    lr: 0.01
+    reg_weight_decay: 0
+    nonreg_weight_decay: 0
+    grad_norm: null
+    epochs: 400
+    runs: 10
+
+  arxiv:
+    architecture:
+      num_layers: 2
+      hidden_channels: 256
+      dropout: 0.5
+      drop_input: false
+      batch_norm: false
+      residual: false
+    num_parts: 80
+    batch_size: 256
+    max_steps: 2
+    pool_size: 2
+    num_workers: 0
+    lr: 0.01
+    reg_weight_decay: 0
+    nonreg_weight_decay: 0
+    grad_norm: none
+    epochs: 300
+    runs: 10
+
+  yelp:
+    architecture:
+      num_layers: 2
+      hidden_channels: 512
+      dropout: 0.0
+      drop_input: false
+      batch_norm: false
+      residual: false
+      linear: false
+    num_parts: 40
+    batch_size: 256
+    max_steps: 4
+    pool_size: 2
+    num_workers: 0
+    lr: 0.01
+    reg_weight_decay: 0
+    nonreg_weight_decay: 0
+    grad_norm: null
+    epochs: 500
+    runs: 10
+
+  products:
+    architecture:
+      num_layers: 2
+      hidden_channels: 256
+      dropout: 0.3
+      drop_input: false
+      batch_norm: false
+      residual: false
+    num_parts: 7
+    batch_size: 256
+    max_steps: 4
+    pool_size: 1
+    num_workers: 0
+    lr: 0.005
+    reg_weight_decay: 0
+    nonreg_weight_decay: 0
+    grad_norm: null
+    epochs: 300
+    runs: 10
